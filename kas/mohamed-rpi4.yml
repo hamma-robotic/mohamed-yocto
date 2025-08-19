@@ -1,31 +1,32 @@
 header:
-  version: 11
-
-build_system: oe
-
+  version: 19  # kas config format version (per docs)
 machine: raspberrypi4-64
-distro: poky
+distro: mohamed         # your custom distro (not poky)
+target: core-image-minimal
 
 repos:
   poky:
-    url: "https://git.yoctoproject.org/poky"
-    refspec: scarthgap
+    url: https://git.yoctoproject.org/poky
+    branch: scarthgap
+    path: layers/poky
     layers:
-      meta
-      meta-poky
-      meta-yocto-bsp
-
-  meta-raspberrypi:
-    url: "https://github.com/agherzan/meta-raspberrypi.git"
-    refspec: scarthgap
-    layers:
-      meta-raspberrypi
+      meta:              # only core layer; not using meta-poky (poky distro)
+      # meta-poky: excluded
+      # meta-yocto-bsp: excluded
 
   meta-openembedded:
-    url: "https://github.com/openembedded/meta-openembedded.git"
-    refspec: scarthgap
+    url: https://github.com/openembedded/meta-openembedded.git
+    branch: scarthgap
+    path: layers/meta-openembedded
     layers:
-      meta-oe
-      meta-python
-      meta-multimedia
-      meta-networking
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-multimedia:
+
+  meta-raspberrypi:
+    url: https://github.com/agherzan/meta-raspberrypi.git
+    branch: scarthgap
+    path: layers/meta-raspberrypi
+    layers:
+      meta-raspberrypi:
